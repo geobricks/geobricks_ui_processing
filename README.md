@@ -1,4 +1,4 @@
-geobricks_ui_processing
+Geobricks UI Processing
 =======================
 
 Geobricks user interface: processing module.
