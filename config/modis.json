@@ -1,0 +1,83 @@
+{
+  "step_1": [
+    {
+      "band": 1,
+      "source_path": "",
+      "output_path": "/extract_bands",
+      "process": [
+        {
+          "extract_bands": ""
+        }
+      ]
+    }
+  ],
+  "step_2": [
+    {
+      "output_path": "/merged_bands",
+      "output_file_name": "MOD13A2_merged.hdf",
+      "process": [
+        {
+          "gdal_merge": {
+            "opt": {
+              "-n": "-3000",
+              "-a_nodata": "-3000"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "step_3": [
+    {
+      "output_path": "/gdalwarp",
+      "output_file_name": "MOD13A2_3857.tif",
+      "process": [
+        {
+          "get_pixel_size": "{{PIXEL_SIZE}}/2.00000000012"
+        },
+        {
+          "gdalwarp": {
+            "opt": {
+              "-multi": "",
+              "-overwrite": "",
+              "-of": "GTiff",
+              "-s_srs": "'+proj=sinu +R=6371007.181 +nadgrids=@null +wktext'",
+              "-t_srs": "EPSG:3857",
+              "-tr": "{{PIXEL_SIZE}} -{{PIXEL_SIZE}}",
+              "-srcnodata": -3000,
+              "-dstnodata": -3000
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "step_4": [
+    {
+      "output_path": "/gdal_translate",
+      "output_file_name": "MOD13A2_3857.tif",
+      "process": [
+        {
+          "gdal_translate": {
+            "opt": {
+              "-co": "'TILED=YES'",
+              "-co": "'COMPRESS=DEFLATE'",
+              "-a_nodata": -3000
+            }
+          }
+        }
+      ]
+    },
+    {
+      "process": [
+        {
+          "gdaladdo": {
+            "parameters": {
+            },
+            "overviews_levels": "2 4 8 16"
+          }
+        }
+      ]
+    }
+  ]
+}
