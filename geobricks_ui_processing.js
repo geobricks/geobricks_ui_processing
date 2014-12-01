@@ -29,6 +29,8 @@ define(['jquery',
         /* Fix the language, if needed. */
         this.CONFIG.lang = this.CONFIG.lang != null ? this.CONFIG.lang : 'en';
 
+        console.debug(this.CONFIG);
+
     };
 
     return new PROCESSING();
