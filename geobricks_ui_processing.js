@@ -1,10 +1,8 @@
-var root = '../modules/';
-
 define(['jquery',
         'mustache',
-        'text!' + root + 'geobricks_ui_processing/html/templates.html',
-        'i18n!' + root + 'geobricks_ui_processing/nls/translate',
-        'text!' + root + 'geobricks_ui_processing/config/modis.json',
+        'text!geobricks_ui_processing/html/templates.html',
+        'i18n!geobricks_ui_processing/nls/translate',
+        'text!geobricks_ui_processing/config/modis.json',
         'sweet-alert',
         'bootstrap'], function ($, Mustache, templates, translate, modis_configuration) {
 
@@ -41,6 +39,11 @@ define(['jquery',
         var source_paths = [];
         for (var i = 0 ; i < this.CONFIG.filenames.length ; i++)
             source_paths.push(this.CONFIG.target_dir + '/' + this.CONFIG.filenames[i]);
+
+        console.debug('PROCESS START:');
+        for (i = 0 ; i < source_paths.length ; i++)
+            console.debug(source_paths[i]);
+        console.debug();
 
         /* Process the first object. */
         this.process_step(source_paths, this.CONFIG.modis_configuration[Object.keys(this.CONFIG.modis_configuration)[0]], 1);
