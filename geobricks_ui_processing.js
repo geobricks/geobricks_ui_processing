@@ -104,6 +104,6 @@ define(['jquery',
 
     };
 
-    return new PROCESSING();
+    return PROCESSING;
 
 });
