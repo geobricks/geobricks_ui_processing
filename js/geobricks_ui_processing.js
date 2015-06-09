@@ -1,6 +1,6 @@
 define(['jquery',
         'mustache',
-        'text!geobricks_ui_processing/html/templates.html',
+        'text!geobricks_ui_processing/html/templates.hbs',
         'i18n!geobricks_ui_processing/nls/translate',
         'text!geobricks_ui_processing/config/modis.json',
         'sweet-alert',
